@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AD340</string>
+    <string name="app_name">AD340 LK</string>
+    <string name="edit_message">Enter name</string>
+    <string name="button_submit">Login</string>
 </resources>
