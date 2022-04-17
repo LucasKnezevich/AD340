@@ -57,6 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/myName" />
 
     <GridView
+        android:id="@+id/main_gridview"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"

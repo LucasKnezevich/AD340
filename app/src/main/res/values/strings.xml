@@ -5,5 +5,5 @@
     <string name="button_viewCalendar">Calendar</string>
     <string name="button_addEvent">Add Event</string>
     <string name="button_gearList">Gear List</string>
-    <string name="button_something">Something</string>
+    <string name="button_AccountInfo">Something</string>
 </resources>
