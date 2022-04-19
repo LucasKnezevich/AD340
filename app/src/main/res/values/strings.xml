@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">AD340 LK</string>
+    <string name="app_title">AD340 App</string>
+    <string name="myName">Lucas Knezevich</string>
     <string name="edit_message">Enter name</string>
+
     <string name="button_submit">Login</string>
-    <string name="button_viewCalendar">Calendar</string>
-    <string name="button_addEvent">Add Event</string>
-    <string name="button_gearList">Gear List</string>
-    <string name="button_AccountInfo">Something</string>
 </resources>

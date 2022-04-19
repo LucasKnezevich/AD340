@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int index, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, ViewGroup parent) {
             Button button;
             if (convertView == null) {
                 button = new Button(myContext);
@@ -70,15 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 button = (Button) convertView;
             }
 
-            button.setText(btn_names_main[index]);
-            button.setId(index);
-             button.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View view) {
-                     Toast toast = Toast.makeText(myContext,btn_names_main[index],Toast.LENGTH_SHORT);
-                     toast.show();
-                 }
-             });
+            button.setText(btn_names_main[position]);
+            button.setId(position);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast toast = Toast.makeText(myContext,btn_names_main[position],
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            });
             return button;
         }
     }
