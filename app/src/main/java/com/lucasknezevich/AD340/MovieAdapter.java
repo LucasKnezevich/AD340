@@ -1,7 +1,5 @@
 package com.lucasknezevich.AD340;
 
-import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -60,7 +56,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getMovieTitle().setText(movies[position][0]);
         holder.getMovieYear().setText(movies[position][1]);
-//        holder.getMovieImg().setImageBitmap();
+        // holder.getMovieImg().setImageURI(Uri.parse(movies[position][3]));
     }
 
     @Override
