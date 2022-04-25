@@ -37,6 +37,8 @@ public class MoviesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
 
+
+
         RecyclerView rv = findViewById(R.id.recyclerView_Movies);
         rv.setLayoutManager(new LinearLayoutManager(this));
         MovieAdapter movieAdapter = new MovieAdapter(movies);
