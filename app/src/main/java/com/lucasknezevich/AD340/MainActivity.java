@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] btn_names_main = {"Movies", "Calendar", "Gear List", "Account Info"};
+    String[] btn_names_main = {"Movies", "Button 2", "Button 3", " Button 4"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,15 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
         Button loginBtn = findViewById(R.id.button_login);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast toast_login = Toast.makeText(getApplicationContext(),
-                        getString(R.string.button_submit),Toast.LENGTH_SHORT);
-                toast_login.show();
-                Intent intent = new Intent(MainActivity.this, MoviesActivity.class);
-                startActivity(intent);
-            }
+        loginBtn.setOnClickListener(view -> {
+            Toast toast_login = Toast.makeText(getApplicationContext(),
+                    getString(R.string.button_submit),Toast.LENGTH_SHORT);
+            toast_login.show();
+            Intent intent = new Intent(MainActivity.this, MoviesActivity.class);
+            startActivity(intent);
         });
 
         GridView main_grid = findViewById(R.id.main_gridview);

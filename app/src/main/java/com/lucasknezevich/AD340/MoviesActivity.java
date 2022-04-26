@@ -16,7 +16,6 @@ import java.util.Objects;
 
 public class MoviesActivity extends AppCompatActivity {
 
-
     String[][] movies = {
             {"Night of the Comet","1984","","https://cdn.collider.com/wp-content/uploads/2016/10/night-of-comet.jpg","What would kids in the 1980s do if the apocalypse blew through the world without them noticing? Hang out at the mall, but of course. Thatâ€™s the set-up for this very funny, quite dated horror-comedy, which begins when a quartet of adolescents lock themselves inside a projection booth at the mallâ€™s multiplex. This somehow allows them to live through an extinction level event of some sort, which has also left roaming bands of murderous mutants. Catherine Mary Stewart of the equally inexplicable Weekend at Bernieâ€™s leads the film, but itâ€™s a movie of mood more than substance ultimately. Does the wealth-fueled naivetÃ© of the average white teenager survive in a vacuum? Does it go away when they are being hunted for sustenance? Itâ€™s an interesting to watch on these terms and when the zombies show up, director Thom Eberhardt adds menace and a tight feel for suspense to the action sequences. And if weâ€™re being honest, it belongs on this list for its soundtrack alone. The rest of this is just whip cream and cherries. â€“ Chris Cabin"},
             {"Dead Snow","2009","Tommy Wirkola","https://cdn.collider.com/wp-content/uploads/2016/07/dead-snow.jpg","With so many zombie movies over the years, eventually youâ€™re going to run out of ways to freshen up the sub-genre. Enter Wirkolaâ€™s decidedly skewed take on zombies in this horror-comedy with plenty of guts. Sure, zombies are great movie monsters, but if you have Nazi zombies, well youâ€™ve just doubled-down on the level of villainy (and pun-worthiness) in your picture! \nThis splatter-fest puts a Nordic spin on the traditional zombie by adding in elements of the Draugr, an undead creature from Scandinavian folklore that fiercely protects its treasure horde. In the case of Dead Snow, these draugr happen to be former SS soldiers who terrorized a Norwegian town and looted their belongings, only to be done in or chased into the freezing mountains by the villagers themselves. Dead Snow gets originality points for this, for sure. Itâ€™s also a very funny, gory, and satisfyingly violent movie with elements of Evil Dead and â€œteen sex/slasherâ€ flicks scattered throughout. And if you like it, thereâ€™s more where that came from in the sequel, Dead Snow: Red vs Dead. â€“ Dave Trumbore"},
@@ -57,12 +56,10 @@ public class MoviesActivity extends AppCompatActivity {
         rv.setAdapter(movieAdapter);
 
         Button btn = findViewById(R.id.testBtn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
-                startActivity(intent);
-            }
+        btn.setOnClickListener(view -> {
+            Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
+            intent.putExtra("test","test message");
+            startActivity(intent);
         });
     }
 
