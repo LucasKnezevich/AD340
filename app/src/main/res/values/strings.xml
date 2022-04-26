@@ -7,4 +7,7 @@
     <string name="button_submit">Login</string>
 
     <string name="movie_img_description">Movie Description</string>
+
+    <string name="movies_label">Movies</string>
+    <string name="movieDetail_label">Movie Details</string>
 </resources>

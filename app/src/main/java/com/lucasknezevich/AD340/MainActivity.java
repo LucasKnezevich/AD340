@@ -26,12 +26,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast toast_login = Toast.makeText(getApplicationContext(),
                         getString(R.string.button_submit),Toast.LENGTH_SHORT);
                 toast_login.show();
-            }
-        });
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MoviesActivity.class);
                 startActivity(intent);
             }

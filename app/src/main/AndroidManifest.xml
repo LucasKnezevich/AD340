@@ -12,8 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AD340">
         <activity
+            android:name=".MovieDetailActivity"
+            android:exported="false"
+            android:label="@string/movieDetail_label"
+            android:parentActivityName=".MoviesActivity" />
+        <activity
             android:name=".MoviesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/movies_label"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

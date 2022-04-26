@@ -1,12 +1,21 @@
 package com.lucasknezevich.AD340;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import java.util.Objects;
 
 public class MoviesActivity extends AppCompatActivity {
+
 
     String[][] movies = {
             {"Night of the Comet","1984","","https://cdn.collider.com/wp-content/uploads/2016/10/night-of-comet.jpg","What would kids in the 1980s do if the apocalypse blew through the world without them noticing? Hang out at the mall, but of course. Thatâ€™s the set-up for this very funny, quite dated horror-comedy, which begins when a quartet of adolescents lock themselves inside a projection booth at the mallâ€™s multiplex. This somehow allows them to live through an extinction level event of some sort, which has also left roaming bands of murderous mutants. Catherine Mary Stewart of the equally inexplicable Weekend at Bernieâ€™s leads the film, but itâ€™s a movie of mood more than substance ultimately. Does the wealth-fueled naivetÃ© of the average white teenager survive in a vacuum? Does it go away when they are being hunted for sustenance? Itâ€™s an interesting to watch on these terms and when the zombies show up, director Thom Eberhardt adds menace and a tight feel for suspense to the action sequences. And if weâ€™re being honest, it belongs on this list for its soundtrack alone. The rest of this is just whip cream and cherries. â€“ Chris Cabin"},
@@ -32,17 +41,29 @@ public class MoviesActivity extends AppCompatActivity {
             {"Dawn of the Dead","1978","George Romero","https://cdn.collider.com/wp-content/uploads/2015/08/dawn-of-the-dead-romero.jpg","George Romero didnâ€™t invent the zombie, but he did single-handedly create the template for the modern zombie movie as we know it with his exquisite Night of the Living Dead. For his sequel, Romero dodged the temptation to retread familiar territory (a quality he would maintain for each of his subsequent â€œdeadâ€ films), ditching the intimate confines of a home for the sprawling reaches of a shopping mall, and trading his black-and-white bleakness for a playful color-saturated palette.\nDawn of the Dead is a horror sequel in every sense, bigger and bloodier, but it maintainâ€™s Romeroâ€™s commitment to piercing social commentary, this time tackling the insatiable lust of American consumerism. Itâ€™s also packed to the brim with Romeroâ€™s skilled eye for visceral violence rendered with first-rate old-school gore effects from Tom Savini, the legendary craftsman of carnage who transplanted his experience as a combat photographer in Vietnam to a career spent creating on-screen nightmares. As in all of Romeroâ€™s great work, that beautifully executed bloodshed is only a backdrop for a compelling character drama as the group of strangers seeking refuge in the abandoned shopping complex cope with increasing interpersonal conflict. Romero directs it all with wit and empathy, and an expert eye for when to drop the next big scare. â€” Haleigh Foutch"}
     };
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
 
-
+        Toolbar toolbar = findViewById(R.id.myToolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDefaultDisplayHomeAsUpEnabled(true);
 
         RecyclerView rv = findViewById(R.id.recyclerView_Movies);
         rv.setLayoutManager(new LinearLayoutManager(this));
         MovieAdapter movieAdapter = new MovieAdapter(movies);
         rv.setAdapter(movieAdapter);
+
+        Button btn = findViewById(R.id.testBtn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

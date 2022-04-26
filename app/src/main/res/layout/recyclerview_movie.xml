@@ -18,13 +18,14 @@
         android:id="@+id/linearLayout_MovieInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/movie_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".2"
+            android:layout_weight=".25"
             android:textAlignment="textStart"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -33,7 +34,7 @@
             android:id="@+id/movie_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight=".75"
             android:textAlignment="textEnd"
             android:textSize="20sp"
             android:textStyle="bold" />

@@ -1,5 +1,6 @@
 package com.lucasknezevich.AD340;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -49,7 +52,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recyclerview_movie, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -57,6 +59,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getMovieTitle().setText(movies[position][0]);
         holder.getMovieYear().setText(movies[position][1]);
+
+        String url = movies[position][3];
+
+        Picasso.get().load(url).into(holder.getMovieImg());
+
         // holder.getMovieImg().setImageURI(Uri.parse(movies[position][3]));
     }
 
