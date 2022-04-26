@@ -7,6 +7,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginHorizontal="12dp"
+    android:layout_marginBottom="20dp"
+    android:padding="10dp"
+    android:background="@drawable/movie_card_background"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/movie_title"
@@ -28,7 +32,8 @@
             android:layout_weight=".25"
             android:textAlignment="textStart"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/movie_text"/>
 
         <TextView
             android:id="@+id/movie_year"
@@ -37,16 +42,16 @@
             android:layout_weight=".75"
             android:textAlignment="textEnd"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/movie_text"/>
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/movie_img"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="175dp"
         android:contentDescription="@string/movie_img_description" />
-
 
 </LinearLayout>
 
