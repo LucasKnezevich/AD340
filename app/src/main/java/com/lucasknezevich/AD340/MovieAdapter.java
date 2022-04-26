@@ -60,11 +60,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.getMovieTitle().setText(movies[position][0]);
         holder.getMovieYear().setText(movies[position][1]);
 
-        String url = movies[position][3];
-
-        Picasso.get().load(url).into(holder.getMovieImg());
-
-        // holder.getMovieImg().setImageURI(Uri.parse(movies[position][3]));
+        Picasso.get().load(movies[position][3]).into(holder.getMovieImg());
     }
 
     @Override
