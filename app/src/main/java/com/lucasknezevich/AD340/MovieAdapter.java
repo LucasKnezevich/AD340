@@ -1,6 +1,7 @@
 package com.lucasknezevich.AD340;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+
+import java.security.Key;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -45,6 +48,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         public ImageView getMovieImg() {
             return movieImg;
         }
+
     }
 
     @NonNull
@@ -61,6 +65,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.getMovieYear().setText(movies[position][1]);
 
         Picasso.get().load(movies[position][3]).into(holder.getMovieImg());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putStringArray("MovieDetail", new String[]{
+                        movies[holder.getAdapterPosition()][0],
+                        movies[holder.getAdapterPosition()][1],
+                        movies[holder.getAdapterPosition()][3],
+                        movies[holder.getAdapterPosition()][4]});
+                Intent intent = new Intent(holder.itemView.getContext(), MovieDetailActivity.class);
+                intent.putExtras(bundle);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

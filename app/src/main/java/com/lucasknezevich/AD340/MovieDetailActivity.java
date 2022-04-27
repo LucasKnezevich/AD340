@@ -20,9 +20,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
-        Intent intent = getIntent();
-        String test = intent.getStringExtra("test");
-        Log.d("INTENT", test);
+//        Intent intent = getIntent();
+//        String test = intent.getStringExtra("test");
+//        Log.d("INTENT", test);
 
         Toolbar toolbar = findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
