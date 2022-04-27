@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.security.Key;
-
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
     String[][] movies;
@@ -71,6 +69,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             bundle.putStringArray("MovieDetail", new String[]{
                     movies[holder.getAdapterPosition()][0],
                     movies[holder.getAdapterPosition()][1],
+                    movies[holder.getAdapterPosition()][2],
                     movies[holder.getAdapterPosition()][3],
                     movies[holder.getAdapterPosition()][4]});
             Intent intent = new Intent(holder.itemView.getContext(), MovieDetailActivity.class);

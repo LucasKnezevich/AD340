@@ -1,8 +1,6 @@
 package com.lucasknezevich.AD340;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;

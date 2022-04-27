@@ -10,4 +10,6 @@
 
     <string name="movies_label">Movies</string>
     <string name="movieDetail_label">Movie Details</string>
+    <string name="movieDetail_director">Directed by</string>
+    <string name="movieDetail_imageDescription">Movie Image</string>
 </resources>

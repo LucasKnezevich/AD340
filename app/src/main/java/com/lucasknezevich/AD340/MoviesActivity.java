@@ -1,17 +1,12 @@
 package com.lucasknezevich.AD340;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.Objects;
 
@@ -55,8 +50,5 @@ public class MoviesActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         MovieAdapter movieAdapter = new MovieAdapter(movies);
         rv.setAdapter(movieAdapter);
-
     }
-
-
 }
