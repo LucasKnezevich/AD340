@@ -20,7 +20,12 @@
             android:name=".MoviesActivity"
             android:exported="false"
             android:label="@string/movies_label"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

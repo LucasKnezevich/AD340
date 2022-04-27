@@ -55,12 +55,13 @@ public class MoviesActivity extends AppCompatActivity {
         MovieAdapter movieAdapter = new MovieAdapter(movies);
         rv.setAdapter(movieAdapter);
 
-        Button btn = findViewById(R.id.testBtn);
-        btn.setOnClickListener(view -> {
-            Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
-            intent.putExtra("test","test message");
-            startActivity(intent);
-        });
+
+//        Button btn = findViewById(R.id.testBtn);
+//        btn.setOnClickListener(view -> {
+//            Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
+//            intent.putExtra("test","test message");
+//            startActivity(intent);
+//        });
     }
 
 
