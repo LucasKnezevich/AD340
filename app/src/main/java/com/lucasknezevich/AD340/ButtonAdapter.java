@@ -1,6 +1,7 @@
 package com.lucasknezevich.AD340;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -47,6 +48,14 @@ public class ButtonAdapter extends BaseAdapter {
             Toast toast = Toast.makeText(myContext,names[position], Toast.LENGTH_SHORT);
             toast.show();
         });
+
+        if (button.getText() == "Movies") {
+            button.setOnClickListener(view -> {
+                Intent intent = new Intent(button.getContext(), MoviesActivity.class);
+                button.getContext().startActivity(intent);
+            });
+        }
+
         return button;
     }
 }

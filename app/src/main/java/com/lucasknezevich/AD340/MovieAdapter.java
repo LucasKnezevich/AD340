@@ -66,19 +66,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         Picasso.get().load(movies[position][3]).into(holder.getMovieImg());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putStringArray("MovieDetail", new String[]{
-                        movies[holder.getAdapterPosition()][0],
-                        movies[holder.getAdapterPosition()][1],
-                        movies[holder.getAdapterPosition()][3],
-                        movies[holder.getAdapterPosition()][4]});
-                Intent intent = new Intent(holder.itemView.getContext(), MovieDetailActivity.class);
-                intent.putExtras(bundle);
-                view.getContext().startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putStringArray("MovieDetail", new String[]{
+                    movies[holder.getAdapterPosition()][0],
+                    movies[holder.getAdapterPosition()][1],
+                    movies[holder.getAdapterPosition()][3],
+                    movies[holder.getAdapterPosition()][4]});
+            Intent intent = new Intent(holder.itemView.getContext(), MovieDetailActivity.class);
+            intent.putExtras(bundle);
+            view.getContext().startActivity(intent);
         });
     }
 

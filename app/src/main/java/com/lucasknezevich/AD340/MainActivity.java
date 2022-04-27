@@ -24,20 +24,9 @@ public class MainActivity extends AppCompatActivity {
             Toast toast_login = Toast.makeText(getApplicationContext(),
                     getString(R.string.button_submit),Toast.LENGTH_SHORT);
             toast_login.show();
-            Intent intent = new Intent(MainActivity.this, MoviesActivity.class);
-            startActivity(intent);
         });
 
         GridView main_grid = findViewById(R.id.main_gridview);
         main_grid.setAdapter(new ButtonAdapter(this, btn_names_main));
-
-//        Button movieBtn = findViewById(0);
-//        movieBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, MoviesActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 }
