@@ -56,6 +56,13 @@ public class ButtonAdapter extends BaseAdapter {
             });
         }
 
+        if (button.getText() == "Seattle 🚗 Cams") {
+            button.setOnClickListener(view -> {
+                Intent intent = new Intent(button.getContext(), TrafficCamActivity.class);
+                button.getContext().startActivity(intent);
+            });
+        }
+
         return button;
     }
 }

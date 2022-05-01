@@ -12,4 +12,7 @@
     <string name="movieDetail_label">Movie Details</string>
     <string name="movieDetail_director">Directed by</string>
     <string name="movieDetail_imageDescription">Movie Image</string>
+
+    <string name="seattleTrafficCams_label">Seattle 🚗 Cameras</string>
+    <string name="seattleTrafficCams_imageDescription">Traffic Camera Image</string>
 </resources>

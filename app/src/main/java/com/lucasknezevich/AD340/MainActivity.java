@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] btn_names_main = {"Movies", "Button 2", "Button 3", " Button 4"};
+    String[] btn_names_main = {"Movies", "Seattle 🚗 Cams", "Button 3", " Button 4"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

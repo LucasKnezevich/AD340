@@ -3,6 +3,7 @@
     package="com.lucasknezevich.AD340">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AD340">
+        <activity
+            android:name=".TrafficCamActivity"
+            android:exported="false"
+            android:label="@string/seattleTrafficCams_label"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MovieDetailActivity"
             android:exported="false"
