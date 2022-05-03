@@ -1,5 +1,6 @@
 package com.lucasknezevich.AD340;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class TrafficCamAdapter extends RecyclerView.Adapter<TrafficCamAdapter.ViewHolder> {
 
-    String[] testData;
+    ArrayList<Camera> cameras;
 
-    public TrafficCamAdapter(String[] data) {
-        testData = data;
+    public TrafficCamAdapter(ArrayList<Camera> camData) {
+        cameras = camData;
     };
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -50,16 +54,14 @@ public class TrafficCamAdapter extends RecyclerView.Adapter<TrafficCamAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull TrafficCamAdapter.ViewHolder holder, int position) {
-        holder.getCamLocation().setText(testData[0]);
+        holder.getCamLocation().setText(cameras.get(position).getDescription());
 
-        Picasso.get().load(testData[1]).into(holder.getCamImage());
+        Picasso.get().load(cameras.get(position).getImageUrl()).into(holder.getCamImage());
+        Log.d("CAMERA URL: ", cameras.get(position).getImageUrl());
     }
 
     @Override
     public int getItemCount() {
-        return testData.length;
+        return cameras.size();
     }
-
-
-
 }
