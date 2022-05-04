@@ -26,9 +26,9 @@ public class Camera {
 
     public String getImageUrl() {
         if (type.equals("sdot")) {
-            return "http://www.seattle.gov/trafficcams/images/" + image;
+            return "https://www.seattle.gov/trafficcams/images/" + image;
         } else {
-            return "http://images.wsdot.wa.gov/nw/" + image;
+            return "https://images.wsdot.wa.gov/nw/" + image;
         }
     }
 
