@@ -69,35 +69,32 @@ public class TrafficCamActivity extends AppCompatActivity {
 
         if (isWifiConnected || isMobileConnected) {
             RequestQueue queue = Volley.newRequestQueue(this);
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET
-                    , url, null, new Response.Listener<JSONObject>() {
-                @SuppressLint("NotifyDataSetChanged")
-                @Override
-                public void onResponse(JSONObject response) {
-                    Log.d("CAMS", response.toString());
+            @SuppressLint("NotifyDataSetChanged") JsonObjectRequest jsonObjectRequest =
+                    new JsonObjectRequest(Request.Method.GET
+                    , url, null, response -> {
+                        Log.d("CAMS", response.toString());
 
-                    try{
-                        JSONArray features = response.getJSONArray("Features");
-                        for (int i = 1; i < features.length(); i++) {
-                            JSONObject point = features.getJSONObject(i);
+                        try{
+                            JSONArray features = response.getJSONArray("Features");
+                            for (int i = 1; i < features.length(); i++) {
+                                JSONObject point = features.getJSONObject(i);
 
-                            JSONArray cams = point.getJSONArray("Cameras");
+                                JSONArray cams = point.getJSONArray("Cameras");
 
-                            for (int j = 0; j < cams.length(); j++) {
-                                JSONObject cam = cams.getJSONObject(j);
-                                Camera camera = new Camera(cam.getString("Description")
-                                        , cam.getString("ImageUrl")
-                                        , cam.getString("Type"));
-//                            Log.d("CAMERA", camera.getImageUrl());
-                                trafficCameras.add(camera);
+                                for (int j = 0; j < cams.length(); j++) {
+                                    JSONObject cam = cams.getJSONObject(j);
+                                    Camera camera = new Camera(cam.getString("Description")
+                                            , cam.getString("ImageUrl")
+                                            , cam.getString("Type"));
+    //                            Log.d("CAMERA", camera.getImageUrl());
+                                    trafficCameras.add(camera);
+                                }
                             }
-                        }
-                        camAdapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
+                            camAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
 
-                    }
-                }
-            }, new Response.ErrorListener() {
+                        }
+                    }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d("JSON ERROR", "Error Message: " + error.getMessage());

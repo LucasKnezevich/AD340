@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AD340">
         <activity
+            android:name=".TrafficCamMapActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/seattleTrafficCamMap_label"/>
+        <activity
             android:name=".TrafficCamActivity"
             android:exported="false"
             android:label="@string/seattleTrafficCams_label"

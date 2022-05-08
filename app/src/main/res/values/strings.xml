@@ -16,4 +16,6 @@
     <string name="seattleTrafficCams_label">Seattle 🚗 Cameras</string>
     <string name="seattleTrafficCams_imageDescription">Traffic Camera Image</string>
     <string name="seattleTrafficCams_noNetworkMsg">Sorry, no network available.</string>
+
+    <string name="seattleTrafficCamMap_label">Traffic Cam Locations</string>
 </resources>

@@ -63,6 +63,16 @@ public class ButtonAdapter extends BaseAdapter {
             });
         }
 
+        if (button.getText() == "Traffic Cam Map") {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(button.getContext(), TrafficCamMapActivity.class);
+                    button.getContext().startActivity(intent);
+                }
+            });
+        }
+
         return button;
     }
 }
