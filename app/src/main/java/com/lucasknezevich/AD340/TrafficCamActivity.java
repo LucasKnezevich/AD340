@@ -78,12 +78,16 @@ public class TrafficCamActivity extends AppCompatActivity {
                             JSONArray features = response.getJSONArray("Features");
                             for (int i = 1; i < features.length(); i++) {
                                 JSONObject point = features.getJSONObject(i);
+                                JSONArray coordinates = point.getJSONArray("PointCoordinate");
 
                                 JSONArray cams = point.getJSONArray("Cameras");
 
                                 for (int j = 0; j < cams.length(); j++) {
                                     JSONObject cam = cams.getJSONObject(j);
-                                    Camera camera = new Camera(cam.getString("Description")
+                                    Camera camera = new Camera(cam.getString("Id")
+                                            , coordinates.getDouble(0)
+                                            , coordinates.getDouble(1)
+                                            , cam.getString("Description")
                                             , cam.getString("ImageUrl")
                                             , cam.getString("Type"));
     //                            Log.d("CAMERA", camera.getImageUrl());

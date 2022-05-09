@@ -6,6 +6,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+
 import java.util.Objects;
 
 public class TrafficCamMapActivity extends AppCompatActivity {
@@ -19,5 +22,7 @@ public class TrafficCamMapActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDefaultDisplayHomeAsUpEnabled(true);
+
     }
+
 }

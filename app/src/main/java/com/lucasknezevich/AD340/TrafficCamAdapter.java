@@ -57,7 +57,7 @@ public class TrafficCamAdapter extends RecyclerView.Adapter<TrafficCamAdapter.Vi
         holder.getCamLocation().setText(cameras.get(position).getDescription());
 
         Picasso.get().load(cameras.get(position).getImageUrl()).into(holder.getCamImage());
-        Log.d("CAMERA URL: ", cameras.get(position).getImageUrl());
+        // Log.d("CAMERA URL: ", cameras.get(position).getImageUrl());
     }
 
     @Override
