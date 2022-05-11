@@ -30,7 +30,6 @@ import java.util.Objects;
 
 public class TrafficCamActivity extends AppCompatActivity {
 
-    Context context;
     ArrayList<Camera> trafficCameras = new ArrayList<>();
 
     @SuppressLint("RestrictedApi")
@@ -43,12 +42,6 @@ public class TrafficCamActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDefaultDisplayHomeAsUpEnabled(true);
 
-        RecyclerView rv = findViewById(R.id.recyclerView_TrafficCams);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        TrafficCamAdapter camAdapter = new TrafficCamAdapter(trafficCameras);
-        rv.setAdapter(camAdapter);
-
-        context = getApplicationContext();
         String url = "https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
 
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -67,44 +60,12 @@ public class TrafficCamActivity extends AppCompatActivity {
         };
 
         if (isWifiConnected || isMobileConnected) {
-            RequestQueue queue = Volley.newRequestQueue(this);
-            @SuppressLint("NotifyDataSetChanged") JsonObjectRequest jsonObjectRequest =
-                    new JsonObjectRequest(Request.Method.GET
-                    , url, null, response -> {
-                        Log.d("CAMS", response.toString());
+            TrafficCamAdapter camAdapter = new TrafficCamAdapter(trafficCameras);
+            Camera.getCameraData(this, trafficCameras, camAdapter);
+            RecyclerView rv = findViewById(R.id.recyclerView_TrafficCams);
+            rv.setLayoutManager(new LinearLayoutManager(this));
+            rv.setAdapter(camAdapter);
 
-                        try{
-                            JSONArray features = response.getJSONArray("Features");
-                            for (int i = 1; i < features.length(); i++) {
-                                JSONObject point = features.getJSONObject(i);
-                                JSONArray coordinates = point.getJSONArray("PointCoordinate");
-
-                                JSONArray cams = point.getJSONArray("Cameras");
-
-                                for (int j = 0; j < cams.length(); j++) {
-                                    JSONObject cam = cams.getJSONObject(j);
-                                    Camera camera = new Camera(cam.getString("Id")
-                                            , coordinates.getDouble(0)
-                                            , coordinates.getDouble(1)
-                                            , cam.getString("Description")
-                                            , cam.getString("ImageUrl")
-                                            , cam.getString("Type"));
-    //                            Log.d("CAMERA", camera.getImageUrl());
-                                    trafficCameras.add(camera);
-                                }
-                            }
-                            camAdapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("JSON ERROR", "Error Message: " + error.getMessage());
-                }
-            });
-
-            queue.add(jsonObjectRequest);
         } else {
             Toast toast = Toast.makeText(getApplicationContext()
                     , getString(R.string.seattleTrafficCams_noNetworkMsg), Toast.LENGTH_LONG);

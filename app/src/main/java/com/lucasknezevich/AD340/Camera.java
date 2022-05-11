@@ -1,5 +1,26 @@
 package com.lucasknezevich.AD340;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class Camera {
 
     private String id;
@@ -50,4 +71,52 @@ public class Camera {
         }
     }
 
+
+    public static void getCameraData(Context context, ArrayList<Camera> cameraArrayList,
+                                     TrafficCamAdapter adapter) {
+        String url = "https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
+
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        @SuppressLint("NotifyDataSetChanged") JsonObjectRequest jsonObjectRequest =
+            new JsonObjectRequest(Request.Method.GET
+                    , url, null, response -> {
+                Log.d("CAMS", response.toString());
+
+                try{
+                    JSONArray features = response.getJSONArray("Features");
+                    for (int i = 0; i < features.length(); i++) {
+                        JSONObject point = features.getJSONObject(i);
+                        JSONArray coordinates = point.getJSONArray("PointCoordinate");
+
+                        JSONArray cams = point.getJSONArray("Cameras");
+
+                        for (int j = 0; j < cams.length(); j++) {
+                            JSONObject cam = cams.getJSONObject(j);
+                            Camera camera = new Camera(cam.getString("Id")
+                                    , coordinates.getDouble(0)
+                                    , coordinates.getDouble(1)
+                                    , cam.getString("Description")
+                                    , cam.getString("ImageUrl")
+                                    , cam.getString("Type")
+                            );
+                            Log.d("CAMERA", camera.getImageUrl());
+                            cameraArrayList.add(camera);
+                        }
+                    }
+
+                    if (adapter != null) {
+                        adapter.notifyDataSetChanged();
+                    }
+                } catch (JSONException e) {
+                    Log.d("ERROR MESSAGE", e.getMessage());
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("JSON ERROR", "Error Message: " + error.getMessage());
+                }
+            });
+        queue.add(jsonObjectRequest);
+    }
 }
