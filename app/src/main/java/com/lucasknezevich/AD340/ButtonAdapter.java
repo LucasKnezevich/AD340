@@ -58,7 +58,7 @@ public class ButtonAdapter extends BaseAdapter {
 
         if (button.getText() == "Seattle 🚗 Cams") {
             button.setOnClickListener(view -> {
-                Intent intent = new Intent(button.getContext(), TrafficCamActivity.class);
+                Intent intent = new Intent(button.getContext(), TrafficCamListActivity.class);
                 button.getContext().startActivity(intent);
             });
         }

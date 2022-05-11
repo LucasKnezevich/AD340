@@ -29,7 +29,7 @@
             android:label="@string/seattleTrafficCamMap_label"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".TrafficCamActivity"
+            android:name=".TrafficCamListActivity"
             android:exported="false"
             android:label="@string/seattleTrafficCams_label"
             android:parentActivityName=".MainActivity" />

@@ -6,7 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,21 +13,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class TrafficCamActivity extends AppCompatActivity {
+public class TrafficCamListActivity extends AppCompatActivity {
 
     ArrayList<Camera> trafficCameras = new ArrayList<>();
 
@@ -60,7 +48,7 @@ public class TrafficCamActivity extends AppCompatActivity {
         };
 
         if (isWifiConnected || isMobileConnected) {
-            TrafficCamAdapter camAdapter = new TrafficCamAdapter(trafficCameras);
+            TrafficCamListAdapter camAdapter = new TrafficCamListAdapter(trafficCameras);
             Camera.getCameraData(this, trafficCameras, camAdapter);
             RecyclerView rv = findViewById(R.id.recyclerView_TrafficCams);
             rv.setLayoutManager(new LinearLayoutManager(this));

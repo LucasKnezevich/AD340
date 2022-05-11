@@ -69,7 +69,7 @@ public class Camera {
 
 
     public static void getCameraData(Context context, ArrayList<Camera> cameraArrayList,
-                                     TrafficCamAdapter adapter) {
+                                     TrafficCamListAdapter adapter) {
         String url = "https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
 
 
