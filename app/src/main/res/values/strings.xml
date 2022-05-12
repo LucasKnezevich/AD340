@@ -13,11 +13,11 @@
     <string name="movieDetail_director">Directed by</string>
     <string name="movieDetail_imageDescription">Movie Image</string>
 
-    <string name="seattleTrafficCams_label">Seattle 🚗 Cameras</string>
+    <string name="seattleTrafficCams_label">Seattle 🚗🚙 Cams</string>
     <string name="seattleTrafficCams_imageDescription">Traffic Camera Image</string>
     <string name="seattleTrafficCams_noNetworkMsg">Sorry, no network available.</string>
 
-    <string name="seattleTrafficCamMap_label">Traffic Cam Locations</string>
+    <string name="seattleTrafficCamMap_label">Traffic Cam Map</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

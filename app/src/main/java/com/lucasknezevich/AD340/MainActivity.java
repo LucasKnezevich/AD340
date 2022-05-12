@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] btn_names_main = {"Movies", "Seattle 🚗 Cams", "Traffic Cam Map", " Button 4"};
+    String[] btn_names_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button loginBtn = findViewById(R.id.button_login);
+
+        btn_names_main = new String[] {getString(R.string.movies_label)
+                , getString(R.string.seattleTrafficCams_label)
+                , getString(R.string.seattleTrafficCamMap_label)
+                , " Button 4"};
 
         loginBtn.setOnClickListener(view -> {
             Toast toast_login = Toast.makeText(getApplicationContext(),

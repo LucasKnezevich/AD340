@@ -39,7 +39,7 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
 
     private static final String TAG = TrafficCamMapActivity.class.getSimpleName();
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private static final int PERMISSIONS_REQUEST_ACCESS_COARSE_LOCAION = 9;
+    private static final int DEFAULT_ZOOM = 12;
 
     private final LatLng spaceNeedle = new LatLng(47.6205,-122.3496);
 
@@ -104,11 +104,11 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
                                                 .defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                                         .showInfoWindow();
                                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastCoordinates
-                                        , 12));
+                                        , DEFAULT_ZOOM));
                             } else {
                                 Log.d(TAG, "Current location null, using defaults");
                                 map.moveCamera(CameraUpdateFactory
-                                        .newLatLngZoom(spaceNeedle, 12));
+                                        .newLatLngZoom(spaceNeedle, DEFAULT_ZOOM));
                                 map.getUiSettings().setMyLocationButtonEnabled(false);
                             }
                         }
@@ -129,8 +129,7 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
         } else {
             Log.d("LOCATION","Permission Not Granted");
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION
-                            , Manifest.permission.ACCESS_COARSE_LOCATION},
+                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }

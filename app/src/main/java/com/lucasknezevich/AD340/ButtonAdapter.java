@@ -49,21 +49,21 @@ public class ButtonAdapter extends BaseAdapter {
             toast.show();
         });
 
-        if (button.getText() == "Movies") {
+        if (button.getText() == myContext.getString(R.string.movies_label)) {
             button.setOnClickListener(view -> {
                 Intent intent = new Intent(button.getContext(), MoviesActivity.class);
                 button.getContext().startActivity(intent);
             });
         }
 
-        if (button.getText() == "Seattle 🚗 Cams") {
+        if (button.getText() == myContext.getString(R.string.seattleTrafficCams_label)) {
             button.setOnClickListener(view -> {
                 Intent intent = new Intent(button.getContext(), TrafficCamListActivity.class);
                 button.getContext().startActivity(intent);
             });
         }
 
-        if (button.getText() == "Traffic Cam Map") {
+        if (button.getText() == myContext.getString(R.string.seattleTrafficCamMap_label)) {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

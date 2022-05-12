@@ -54,7 +54,10 @@ public class TrafficCamListAdapter extends RecyclerView.Adapter<TrafficCamListAd
     public void onBindViewHolder(@NonNull TrafficCamListAdapter.ViewHolder holder, int position) {
         holder.getCamLocation().setText(cameras.get(position).getDescription());
 
-        Picasso.get().load(cameras.get(position).getImageUrl()).into(holder.getCamImage());
+        Picasso.get()
+                .load(cameras.get(position).getImageUrl())
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(holder.getCamImage());
         // Log.d("CAMERA URL: ", cameras.get(position).getImageUrl());
     }
 
