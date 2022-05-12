@@ -36,6 +36,7 @@ dependencies {
     def volley_version = "1.2.1"
 
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 
     implementation "com.squareup.picasso:picasso:$picasso_version"
     implementation "com.android.volley:volley:$volley_version"

@@ -77,7 +77,7 @@ public class Camera {
         @SuppressLint("NotifyDataSetChanged") JsonObjectRequest jsonObjectRequest =
             new JsonObjectRequest(Request.Method.GET
                     , url, null, response -> {
-                Log.d("CAMS", response.toString());
+                // Log.d("CAMS", response.toString());
 
                 try{
                     JSONArray features = response.getJSONArray("Features");
@@ -96,7 +96,7 @@ public class Camera {
                                     , cam.getString("ImageUrl")
                                     , cam.getString("Type")
                             );
-                            Log.d("CAMERA", camera.getImageUrl());
+                            // Log.d("CAMERA", camera.getImageUrl());
                             cameraArrayList.add(camera);
                         }
                     }

@@ -24,7 +24,7 @@ public class TrafficCamListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_traffic_cam);
+        setContentView(R.layout.activity_traffic_cam_list);
 
         Toolbar toolbar = findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
