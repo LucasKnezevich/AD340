@@ -34,15 +34,16 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
 
     private GoogleMap map;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private LocationCallback locationCallback;
     private Location lastLocation;
-    private LocationRequest locationRequest;
     private boolean locationPermissionGranted;
 
     private static final String TAG = TrafficCamMapActivity.class.getSimpleName();
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private static final int PERMISSIONS_REQUEST_ACCESS_COARSE_LOCAION = 9;
 
-    private boolean AddressRequested;
+    private final LatLng spaceNeedle = new LatLng(47.6205,-122.3496);
+
+    private ArrayList<Camera> cameras = new ArrayList<>();
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -54,15 +55,13 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDefaultDisplayHomeAsUpEnabled(true);
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
 
-
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
     @Override
@@ -70,7 +69,6 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
         map = googleMap;
         Log.d("MAP", "MAP READY");
 
-        LatLng spaceNeedle = new LatLng(47.6205,-122.3496);
         map.addMarker(new MarkerOptions()
                 .position(spaceNeedle)
                 .title("Space Needle"))
@@ -81,68 +79,16 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
         updateLocationUI();
         getDeviceLocation();
 
-//        ArrayList<Camera> cameras = new ArrayList<>();
-//        Camera.getCameraData(this, cameras, null);
-//        showCameraMarkers(cameras);
+        Camera.getCameraData(this, cameras, null);
+        showCameraMarkers(cameras);
     }
 
-    private void showCameraMarkers(ArrayList<Camera> camList) {
-        for (Camera cam : camList) {
-            Log.d("CAM", cam.getDescription());
-            map.addMarker( new MarkerOptions().position(new LatLng(cam.getLatitude(),
-                    cam.getLongitude())).title(cam.getDescription()));
-        }
-        Log.d("TEST", "TEST");
-    }
-
-    private void getLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationPermissionGranted = true;
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        locationPermissionGranted = false;
-        if (requestCode == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                locationPermissionGranted = true;
-            }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-        updateLocationUI();
-    }
-
-    private void updateLocationUI() {
-        if (map == null) {
-            return;
-        }
-        try {
-            if (locationPermissionGranted) {
-                map.setMyLocationEnabled(true);
-                map.getUiSettings().setMyLocationButtonEnabled(true);
-            } else {
-                map.setMyLocationEnabled(false);
-                map.getUiSettings().setMyLocationButtonEnabled(false);
-                lastLocation = null;
-                // getLocationPermission();
-            }
-        } catch (SecurityException e) {
-            Log.e("Exception", e.getMessage());
-        }
-    }
 
     private void getDeviceLocation() {
         try {
             if (locationPermissionGranted) {
-                Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
+                @SuppressLint("MissingPermission") Task<Location> locationResult =
+                        fusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
@@ -161,6 +107,9 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
                                         , 12));
                             } else {
                                 Log.d(TAG, "Current location null, using defaults");
+                                map.moveCamera(CameraUpdateFactory
+                                        .newLatLngZoom(spaceNeedle, 12));
+                                map.getUiSettings().setMyLocationButtonEnabled(false);
                             }
                         }
                     }
@@ -168,6 +117,64 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
             }
         } catch (SecurityException e) {
             Log.e("Exception: ", e.getMessage());
+        }
+    }
+
+    private void getLocationPermission() {
+        Log.d("LOCATION", "Get Location Permission");
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Log.d("LOCATION", "Permission Granted");
+            locationPermissionGranted = true;
+        } else {
+            Log.d("LOCATION","Permission Not Granted");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION
+                            , Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        locationPermissionGranted = false;
+        if (requestCode == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                locationPermissionGranted = true;
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        updateLocationUI();
+    }
+
+    private void showCameraMarkers(ArrayList<Camera> camList) {
+        for (Camera cam : camList) {
+            Log.d("CAM", cam.getDescription());
+            map.addMarker( new MarkerOptions().position(new LatLng(cam.getLatitude(),
+                    cam.getLongitude())).title(cam.getDescription()));
+        }
+        // Log.d("TEST", "TEST");
+    }
+
+    @SuppressLint("MissingPermission")
+    private void updateLocationUI() {
+        if (map == null) {
+            return;
+        }
+        try {
+            if (locationPermissionGranted) {
+                map.setMyLocationEnabled(true);
+                map.getUiSettings().setMyLocationButtonEnabled(true);
+            } else {
+                map.setMyLocationEnabled(false);
+                map.getUiSettings().setMyLocationButtonEnabled(false);
+                lastLocation = null;
+                getLocationPermission();
+            }
+        } catch (SecurityException e) {
+            Log.e("Exception", e.getMessage());
         }
     }
 
