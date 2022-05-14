@@ -112,7 +112,7 @@ public class Camera {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.d("JSON ERROR", "Error Message: " + error.getMessage());
+                    responseListener.onError(error.getMessage());
                 }
             });
         queue.add(jsonObjectRequest);
