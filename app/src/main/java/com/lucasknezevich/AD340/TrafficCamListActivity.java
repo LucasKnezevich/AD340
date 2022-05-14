@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,11 +49,20 @@ public class TrafficCamListActivity extends AppCompatActivity {
         };
 
         if (isWifiConnected || isMobileConnected) {
-            TrafficCamListAdapter camAdapter = new TrafficCamListAdapter(trafficCameras);
-            Camera.getCameraData(this, trafficCameras, camAdapter);
-            RecyclerView rv = findViewById(R.id.recyclerView_TrafficCams);
-            rv.setLayoutManager(new LinearLayoutManager(this));
-            rv.setAdapter(camAdapter);
+            Camera.getCameraData(this, new Camera.ResponseListener() {
+                @Override
+                public void onResponse(ArrayList<Camera> cameraArrayList) {
+                    TrafficCamListAdapter trafficCamListAdapter = new TrafficCamListAdapter(cameraArrayList);
+                    RecyclerView rv = findViewById(R.id.recyclerView_TrafficCams);
+                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    rv.setAdapter(trafficCamListAdapter);
+                }
+
+                @Override
+                public void onError(String errorMessage) {
+                    Log.d("ERROR: ", errorMessage);
+                }
+            });
 
         } else {
             Toast toast = Toast.makeText(getApplicationContext()

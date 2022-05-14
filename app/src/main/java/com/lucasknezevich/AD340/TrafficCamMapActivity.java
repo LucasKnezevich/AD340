@@ -43,8 +43,6 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
 
     private final LatLng spaceNeedle = new LatLng(47.6205,-122.3496);
 
-    private ArrayList<Camera> cameras = new ArrayList<>();
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,18 +67,21 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
         map = googleMap;
         Log.d("MAP", "MAP READY");
 
-        map.addMarker(new MarkerOptions()
-                .position(spaceNeedle)
-                .title("Space Needle"))
-                .showInfoWindow();
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(spaceNeedle,12));
-
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
 
-        Camera.getCameraData(this, cameras, null);
-        showCameraMarkers(cameras);
+        Camera.getCameraData(this, new Camera.ResponseListener() {
+            @Override
+            public void onError(String errorMessage) {
+                Log.d("ERROR: ", errorMessage);
+            }
+
+            @Override
+            public void onResponse(ArrayList<Camera> cameraArrayList) {
+                showCameraMarkers(cameraArrayList);
+            }
+        });
     }
 
 

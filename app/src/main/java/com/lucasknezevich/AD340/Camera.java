@@ -67,11 +67,16 @@ public class Camera {
         }
     }
 
+    public interface ResponseListener {
+        void onResponse(ArrayList<Camera> cameraArrayList);
+        void onError(String errorMessage);
+    }
 
-    public static void getCameraData(Context context, ArrayList<Camera> cameraArrayList,
-                                     TrafficCamListAdapter adapter) {
+
+    public static void getCameraData(Context context
+            , ResponseListener responseListener) {
         String url = "https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
-
+        ArrayList<Camera> cameraArrayList = new ArrayList<>();
 
         RequestQueue queue = Volley.newRequestQueue(context);
         @SuppressLint("NotifyDataSetChanged") JsonObjectRequest jsonObjectRequest =
@@ -100,13 +105,10 @@ public class Camera {
                             cameraArrayList.add(camera);
                         }
                     }
-
-                    if (adapter != null) {
-                        adapter.notifyDataSetChanged();
-                    }
                 } catch (JSONException e) {
                     Log.d("ERROR MESSAGE", e.getMessage());
                 }
+                responseListener.onResponse(cameraArrayList);
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
