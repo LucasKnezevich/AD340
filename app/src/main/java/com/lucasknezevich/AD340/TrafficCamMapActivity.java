@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +36,7 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
     private GoogleMap map;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private Location lastLocation;
+    private LocationCallback locationCallback;
     private boolean locationPermissionGranted;
 
     private static final String TAG = TrafficCamMapActivity.class.getSimpleName();
@@ -60,14 +62,14 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
         }
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map = googleMap;
-        Log.d("MAP", "MAP READY");
+        Log.d(TAG, "MAP READY");
 
-        getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
 
@@ -76,14 +78,13 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
             public void onError(String errorMessage) {
                 Log.d("ERROR: ", errorMessage);
             }
-
             @Override
             public void onResponse(ArrayList<Camera> cameraArrayList) {
                 showCameraMarkers(cameraArrayList);
             }
         });
-    }
 
+    }
 
     private void getDeviceLocation() {
         try {
@@ -96,18 +97,10 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
                         if (task.isSuccessful()) {
                             lastLocation = task.getResult();
                             if (lastLocation != null) {
-                                LatLng lastCoordinates = new LatLng(lastLocation.getLatitude(),
-                                        lastLocation.getLongitude());
-                                map.addMarker(new MarkerOptions()
-                                        .position(lastCoordinates)
-                                        .title("Your Location: " + lastCoordinates.toString())
-                                        .icon(BitmapDescriptorFactory
-                                                .defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
-                                        .showInfoWindow();
-                                map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastCoordinates
-                                        , DEFAULT_ZOOM));
+                                Log.d(TAG, "LAST LOCATION FOUND");
+                                showLastLocation();
                             } else {
-                                Log.d(TAG, "Current location null, using defaults");
+                                Log.d(TAG, "CURRENT LOCATION NULL, USING DEFAULT");
                                 map.moveCamera(CameraUpdateFactory
                                         .newLatLngZoom(spaceNeedle, DEFAULT_ZOOM));
                                 map.getUiSettings().setMyLocationButtonEnabled(false);
@@ -122,15 +115,15 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
     }
 
     private void getLocationPermission() {
-        Log.d("LOCATION", "Get Location Permission");
+        Log.d(TAG, "RETRIEVING LOCATION PERMISSION");
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Log.d("LOCATION", "Permission Granted");
+                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "LOCATION PERMISSION GRANTED");
             locationPermissionGranted = true;
         } else {
-            Log.d("LOCATION","Permission Not Granted");
+            Log.d(TAG,"LOCATION PERMISSION NOT GRANTED");
             ActivityCompat.requestPermissions(this,
-                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+                    new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
@@ -151,11 +144,23 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
 
     private void showCameraMarkers(ArrayList<Camera> camList) {
         for (Camera cam : camList) {
-            Log.d("CAM", cam.getDescription());
+            // Log.d("CAM", cam.getDescription());
             map.addMarker( new MarkerOptions().position(new LatLng(cam.getLatitude(),
                     cam.getLongitude())).title(cam.getDescription()));
         }
-        // Log.d("TEST", "TEST");
+    }
+
+    private void showLastLocation() {
+        LatLng lastCoordinates = new LatLng(lastLocation.getLatitude(),
+                lastLocation.getLongitude());
+        map.addMarker(new MarkerOptions()
+                .position(lastCoordinates)
+                .title("Your Location: " + lastCoordinates.toString())
+                .icon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                .showInfoWindow();
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastCoordinates
+                , DEFAULT_ZOOM));
     }
 
     @SuppressLint("MissingPermission")
