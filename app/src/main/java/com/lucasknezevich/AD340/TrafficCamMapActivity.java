@@ -70,8 +70,10 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
         map = googleMap;
         Log.d(TAG, "MAP READY");
 
-        updateLocationUI();
+        getLocationPermission();
         getDeviceLocation();
+        updateLocationUI();
+
 
         Camera.getCameraData(this, new Camera.ResponseListener() {
             @Override
@@ -153,11 +155,11 @@ public class TrafficCamMapActivity extends AppCompatActivity implements OnMapRea
     private void showLastLocation() {
         LatLng lastCoordinates = new LatLng(lastLocation.getLatitude(),
                 lastLocation.getLongitude());
-        map.addMarker(new MarkerOptions()
+        Objects.requireNonNull(map.addMarker(new MarkerOptions()
                 .position(lastCoordinates)
                 .title("Your Location: " + lastCoordinates.toString())
                 .icon(BitmapDescriptorFactory
-                        .defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                        .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))))
                 .showInfoWindow();
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(lastCoordinates
                 , DEFAULT_ZOOM));
