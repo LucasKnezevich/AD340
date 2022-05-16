@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         emailField = findViewById(R.id.editText_email);
         passwordField = findViewById(R.id.editText_password);
 
-        nameField.setText(sharedPreferencesHelper.getEntry("name"));
+        nameField.setText(sharedPreferencesHelper.getEntry("username"));
         emailField.setText(sharedPreferencesHelper.getEntry("email"));
         passwordField.setText(sharedPreferencesHelper.getEntry("password"));
 
@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
     private void signIn() {
 
         String username = nameField.getText().toString();
-        String email = nameField.getText().toString();
-        String password = nameField.getText().toString();
+        String email = emailField.getText().toString();
+        String password = passwordField.getText().toString();
 
         Log.d(TAG, "signIn");
 
@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // 2 - save valid entries to shared preferences
-
+        sharedPreferencesHelper.saveEntry("username", username);
+        sharedPreferencesHelper.saveEntry("email", email);
+        sharedPreferencesHelper.saveEntry("password", password);
 
         // 3 - sign into Firebase
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
