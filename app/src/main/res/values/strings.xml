@@ -6,7 +6,9 @@
     <string name="editText_email">Email</string>
     <string name="editText_password">Password</string>
 
-    <string name="button_submit">Login</string>
+    <string name="main_buttonLogin">Login</string>
+
+    <string name="firebaseActivity_label">Firebase Activity</string>
 
     <string name="movie_img_description">Movie Description</string>
 

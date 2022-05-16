@@ -78,3 +78,5 @@ dependencies {
 secrets {
     defaultPropertiesFileName 'local.properties'
 }
+
+apply plugin: 'com.google.gms.google-services'

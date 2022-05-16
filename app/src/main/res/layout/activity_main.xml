@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginVertical="10dp"
-        android:text="@string/button_submit"
+        android:text="@string/main_buttonLogin"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

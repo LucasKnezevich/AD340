@@ -43,6 +43,11 @@
             android:label="@string/movies_label"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".FirebaseActivity"
+            android:exported="false"
+            android:label="@string/firebaseActivity_label"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>

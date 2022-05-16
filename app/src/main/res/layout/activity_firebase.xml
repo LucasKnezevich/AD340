@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".FirebaseActivity">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/appbar"
+        android:id="@+id/appbar_firebase"/>
 
     <ListView
         android:id="@+id/userList"
