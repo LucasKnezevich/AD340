@@ -124,21 +124,42 @@ public class MainActivity extends AppCompatActivity {
     private boolean validateForm(String username, String email, String password) {
         boolean isValid = true;
 
-        if (email.isEmpty()) {
-            emailField.setError("Required");
-            isValid = false;
+        if (isInputValid(username)) {
+            nameField.setError(null);
         } else {
-            emailField.setError(null);
+            nameField.setError("Required");
+            isValid = false;
         }
 
-        if (password.isEmpty()) {
+        if (isInputValid(email)) {
+            emailField.setError(null);
+        } else {
+            emailField.setError("Required");
+            isValid = false;
+        }
+
+        if (isPasswordValid(password)) {
+            passwordField.setError(null);
+        } else {
             passwordField.setError("Required");
             isValid = false;
-        } else {
-            passwordField.setError(null);
         }
 
         return isValid;
+    }
+
+    public boolean isInputValid(String str) {
+        if (str.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isPasswordValid(String str) {
+        if (str.length() < 8) {
+            return false;
+        }
+        return true;
     }
 
 }
